@@ -1,12 +1,17 @@
 import responses from "./responses.js";
 
-async function wordCounter(filePath, word) {
-  let allResponses = await responses(filePath);
-
-  const allWordsInDocument = allResponses
+function splitTextByWords(text){
+  const allWordsInDocument = text
     .replace(/[,.?!]/g, "")
     .split(/\s+/)
     .filter((word) => word !== "");
+  return allWordsInDocument;  
+}
+
+async function wordCounter(filePath, word) {
+  let allResponses = await responses(filePath);
+
+  let allWordsInDocument = splitTextByWords(allResponses)
 
   const counter = allWordsInDocument.reduce((acc, curr) => {
     if (curr === word) {
@@ -18,4 +23,4 @@ async function wordCounter(filePath, word) {
   return counter;
 }
 
-export default wordCounter;
+export {wordCounter, splitTextByWords};
