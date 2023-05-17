@@ -1,4 +1,4 @@
-import wordCounter from "./wordCounter.js"
+import {wordCounter} from "./wordCounter.js"
 import counterRepeatedWords from "./counterRepeatedWords.js"
 
 async function app() {
@@ -7,7 +7,7 @@ async function app() {
 
   let responsesPath = "./respuestas"
   
-  let wordsQty = counterRepeatedWords(responsesPath)
+  let wordsQty = await counterRepeatedWords(responsesPath)
   
   console.log(`Most repeated words are: ${wordsQty}`)
 }
